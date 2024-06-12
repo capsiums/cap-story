@@ -64,9 +64,10 @@ To serve the Claire story using Capsium, use the following command:
 
 [source,sh]
 ----
-$ capsium reactor serve cap
+$ bundle
+$ bundle exec capsium reactor serve cap
 # or
-$ capsium reactor serve https://github.com/capsiums/cap-story/releases/download/v0.9.0/story_of_claire-0.9.0.cap
+$ bundle exec capsium reactor serve https://github.com/capsiums/cap-story/releases/download/v0.9.0/story_of_claire-0.9.0.cap
 ----
 
 Replace `https://github.com/capsiums/cap-story/releases/download/v0.9.0/story_of_claire-0.9.0.cap` with the actual URL of your `.cap` file hosted on GitHub or another platform.
@@ -75,7 +76,7 @@ To package the Claire story using Capsium, use the following command:
 
 [source,sh]
 ----
-$ capsium package pack -f cap
+$ bundle exec capsium package pack -f cap
 Package created: story_of_claire-0.9.0.cap
 ----
 
