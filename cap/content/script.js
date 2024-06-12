@@ -64,20 +64,16 @@ document.addEventListener("DOMContentLoaded", function() {
     // Highlight the current section in the TOC
     const sections = document.querySelectorAll('.story h2');
     const tocLinks = document.querySelectorAll('.toc a');
+
     let currentSection = sections[0];
-
-    sections.forEach(section => {
+    sections.forEach((section, i) => {
       const rect = section.getBoundingClientRect();
-      if (rect.top <= 100 && rect.top > -rect.height) {
+      if (rect.top <= 100 && rect.bottom > 100) {
         currentSection = section;
-      }
-    });
-
-    tocLinks.forEach(link => {
-      link.classList.remove('active');
-      if (currentSection && link.getAttribute('href') === `#${currentSection.id}`) {
-        link.classList.add('active');
+        tocLinks.forEach(link => link.classList.remove('active'));
+        tocLinks[i].classList.add('active');
       }
     });
   });
+
 });
