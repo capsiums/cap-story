@@ -9,7 +9,7 @@ on:
   pull_request:
 
 jobs:
-  package:
+  build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -19,5 +19,5 @@ jobs:
         ruby-version: '3.3'
         bundler-cache: true
     - name: package contents
-      run: capsium package pack -f package/
+      run: bundle exec capsium package pack -f cap/
     # TODO: Add validate command
