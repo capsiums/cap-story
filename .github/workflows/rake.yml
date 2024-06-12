@@ -21,3 +21,7 @@ jobs:
     - name: package contents
       run: bundle exec capsium package pack -f cap/
     # TODO: Add validate command
+    - uses: actions/upload-artifact@v4
+      with:
+        name: package
+        path: '*.cap'
