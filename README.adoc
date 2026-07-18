@@ -58,6 +58,26 @@ The story features several characters, each representing a key aspect of Capsium
 - **Isaac the Integrator**: Represents interoperability and data exchange.
 - **Olivia the Optimizer**: Symbolizes efficiency and optimization.
 
+== Package structure
+
+The `cap/` directory is the Capsium package source:
+
+----
+cap/
+├── metadata.json   # Package metadata (name, version, guid, uuid, license, ...)
+└── content/        # Servable content root
+    ├── index.html  # Root file (entry point)
+    ├── script.js   # TOC, scroll progress, Markdown rendering glue
+    ├── styles.css  # Story styling
+    ├── vendor/
+    │   └── marked.min.js  # Vendored marked.js (MIT) — the package is fully self-contained
+    └── images/     # Character illustrations
+----
+
+`manifest.json`, `routes.json`, `storage.json` and `security.json` are
+generated automatically when the package is packed or loaded; `security.json`
+contains the SHA-256 checksums reactors use to verify package integrity.
+
 == Usage
 
 To serve the Claire story using Capsium, use the following command:
@@ -67,17 +87,27 @@ To serve the Claire story using Capsium, use the following command:
 $ bundle
 $ bundle exec capsium reactor serve cap
 # or
-$ bundle exec capsium reactor serve https://github.com/capsiums/cap-story/releases/download/v0.9.0/story_of_claire-0.9.0.cap
+$ bundle exec capsium reactor serve https://github.com/capsiums/cap-story/releases/download/v1.0.0/story-of-claire-1.0.0.cap
 ----
 
-Replace `https://github.com/capsiums/cap-story/releases/download/v0.9.0/story_of_claire-0.9.0.cap` with the actual URL of your `.cap` file hosted on GitHub or another platform.
+Replace `https://github.com/capsiums/cap-story/releases/download/v1.0.0/story-of-claire-1.0.0.cap` with the actual URL of your `.cap` file hosted on GitHub or another platform.
 
 To package the Claire story using Capsium, use the following command:
 
 [source,sh]
 ----
 $ bundle exec capsium package pack -f cap
-Package created: story_of_claire-0.9.0.cap
+Package created: story-of-claire-1.0.0.cap
+----
+
+To inspect the package:
+
+[source,sh]
+----
+$ bundle exec capsium package info cap       # overview: metadata, routes, storage
+$ bundle exec capsium package manifest cap   # generated manifest.json
+$ bundle exec capsium package routes cap     # generated routes.json
+$ bundle exec capsium package validate cap   # structural + integrity checks
 ----
 
 

@@ -16,11 +16,12 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '3.3'
+        ruby-version: '3.4'
         bundler-cache: true
-    - name: package contents
+    - name: Validate package
+      run: bundle exec capsium package validate cap/
+    - name: Package contents
       run: bundle exec capsium package pack -f cap/
-    # TODO: Add validate command
     - uses: actions/upload-artifact@v4
       with:
         name: package
