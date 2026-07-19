@@ -11,21 +11,16 @@ jobs:
       contents: write
     steps:
     - uses: actions/checkout@v4
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
+    - uses: capsiums/pack-action@v1
+      id: pack
       with:
-        ruby-version: '3.4'
-        bundler-cache: true
-    - name: Validate package
-      run: bundle exec capsium package validate cap/
-    - name: Package contents
-      run: bundle exec capsium package pack -f cap/
+        source: cap/
+        upload-artifact: 'false'
     - name: Upload package to release
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: '*.cap'
-        file_glob: true
+        file: ${{ steps.pack.outputs.cap-file }}
         tag: ${{ github.ref_name }}
         overwrite: true
         body: "Capsium package built from ${{ github.ref_name }}"
